@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Title</title>
+</head>
+<body>
+    <h1 th:text="${title}"></h1>
+    <form method = "post">
+        <h2>What are you looking for in a high school?</h2>
+
+        <section class="schoolType">
+            <label for="type">What type of school do you currently attend?</label>
+            <select name="schoolType" id="type">
+                <option value="public">Public</option>
+                <option value="private-religious">Private Religious</option>
+                <option value="private-independent">Private Independent</option>
+            </select>
+        </section>
+        <hr>
+
+        <section class="ideal-school">
+            <span>What types of schools are you interested in attending?</span>
+            <br>
+            <input type="checkbox" name="publicSchool" id="public" value="public"/>
+            <label for="public">Public</label>
+            <input type="checkbox" name="privateCatholic" id="private-catholic" value="private-catholic"/>
+            <label for="private-catholic">Private-Catholic</label>
+            <input type="checkbox" name="privateReligious" id="private-religious" value="private-religious"/>
+            <label for="private-religious">Private-Religious</label>
+            <input type="checkbox" name="privateIndependent" id="private-independent" value="private-independent"/>
+            <label for="private-independent">Private-Independent</label>
+        </section>
+        <hr>
+
+        <section class="sports">
+            <span>What sports would you like to participate in?</span>
+            <br>
+            <input type="checkbox" name="football" id="football" value="football"/>
+            <label for="football">Football</label>
+            <input type="checkbox" name="basketball" id="basketball" value="basketball"/>
+            <label for="basketball">Basketball</label>
+            <input type="checkbox" name="sports" id="soccer" value="soccer"/>
+            <label for="soccer">Soccer</label>
+            <input type="checkbox" name="sports" id="tennis" value="tennis"/>
+            <label for="tennis">Tennis</label>
+        </section>
+        <hr>
+
+        <section class="notes">
+            <label for="notes" id="notes">Anything else you want to mention</label>
+            <br>
+            <textarea name="notes" rows="6" cols="60"></textarea>
+        </section>
+        <hr>
+
+        <input type="submit" value="Submit Survey" />
+    </form>
+
+</body>
+</html>
