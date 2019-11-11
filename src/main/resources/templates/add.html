@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+    <h1 th:text="${title}">Title</h1>
+    <nav th:replace="fragments :: navigation"></nav>
+    <br>
+
+    <form method = "post">
+        <section class="school name">
+            <label for="school_name" id="school_name">Name: </label>
+            <textarea name="school_name"></textarea>
+
+        </section>
+        <hr>
+        <section class="school address">
+            <label for="school_address" id="school_address">Address: </label>
+            <textarea name="school address"></textarea>
+
+        </section>
+        <hr>
+
+        <section class="school phone number">
+            <label for="phone_number" id="phone_number">Phone Number: </label>
+            <textarea name="phone_number"></textarea>
+
+        </section>
+        <hr>
+
+        <section class="school type">
+            <label name="school_type" id="school_type">Type: </label>
+            <select for="school_type">
+                <option> </option>
+                <option value="public">Public</option>
+                <option value="private_religious">Private Religious</option>
+                <option value="private_independent">Private Independent</option>
+            </select>
+
+        </section>
+        <hr>
+
+        <section class="GPA required">
+            <label name="gpa" id="gpa">Minimum GPA Required: </label>
+            <select name="gpa">
+                <option> </option>
+                <option value="3.5 - 4.0">3.5 - 4.0</option>
+                <option value="3.0 - 3.5">3.0 - 3.5</option>
+                <option value="2.5 - 3.0">2.5 - 3.0 </option>
+                <option value="lower then 2.5">Lower than 2.5</option>
+            </select>
+        </section>
+        <hr>
+
+        <section class="MAP">
+            <label for="map_score" id="map_score">Miminum MAP Score Required: </label>
+            <select name="map_score">
+                <option> </option>
+                <option value="proficient_or_advanced">Proficient or Advanced</option>
+                <option value="basic">Basic </option>
+                <option value="below_basic">Below Basic</option>
+            </select>
+
+        </section>
+        <hr>
+
+        <section class="specialty">
+            <label for="specialty" id="specialty">Specialty</label>
+            <select name="specialty">
+                <option> </option>
+                <option value="STEM">STEM (Science, Technology, Engineering, and Math)</option>
+                <option value="Arts">Visual and Performing Arts</option>
+                <option value="general">General <i>(may include STEM and Visual and Performing Arts</i></option>
+            </select>
+
+        </section>
+        <hr>
+
+        <section class="sports">
+            <span>Sports <i>(check all that apply)</i></span>
+                <input type="checkbox" name="football" id="football" value="football">
+                    <label>Football</label>
+                <input type="checkbox" name="volleyball" id="volleyball" value="volleyball">
+                    <label>Volleyball</label>
+                <input type="checkbox" name="baseball" id="baseball" value="baseball">
+                    <label>Baseball</label>
+                <input type="checkbox" name="soccer" id="soccer" value="soccer">
+                    <label>Soccer</label>
+                <input type="checkbox" name="basketball" id="basketball" value="basketball">
+                    <label>Basketball</label>
+                <input type="checkbox" name="swimming" id="swimming" value="swimming">
+                    <label>Swimming</label>
+                <input type="checkbox" name="wrestling" id="wrestling" value="wrestling">
+                    <label>Wrestling</label>
+                <input type="checkbox" name="cheerleading" id="cheerleading" value="cheerleading">
+                    <label>Cheerleading</label>
+                <input type="checkbox" name="dance" id="dance" value="dance">
+                    <label>Dance</label>
+        </section>
+        <hr>
+
+        <input type="submit" value="Submit Survey" />
+
+    </form>
+
+</body>
+</html>
