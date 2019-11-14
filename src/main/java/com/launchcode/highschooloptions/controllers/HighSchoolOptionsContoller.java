@@ -17,14 +17,12 @@ public class HighSchoolOptionsContoller {
 
     static ArrayList<String> schools = new ArrayList<>();
 
+    static ArrayList<String> preferences = new ArrayList<>();
+
 
     // Request path: /options
     @RequestMapping (value = "")
     public String index(Model model) {
-
-        schools.add("Metro");
-        schools.add("Collegiate");
-        schools.add("McKinley");
 
         model.addAttribute("schools", schools);
         model.addAttribute("title", "High School Options");
@@ -40,15 +38,33 @@ public class HighSchoolOptionsContoller {
     }
 
     @RequestMapping(value = "survey", method = RequestMethod.POST)
-    public String processSchoolSurveyForm(@RequestParam String schoolType, String publicSchool,
+    public String processSchoolSurveyForm(Model model, @RequestParam String schoolType, String publicSchool,
                                           String privateReligious, String privateCatholic,
                                           String privateIndependent, String football, String basketball,
                                           String soccer, String tennis, String notes) {
 
-        schools.add(schoolType);
+        model.addAttribute("preferences", "Your Preferences");
+
+        preferences.add(schoolType);
+        preferences.add(publicSchool);
+        preferences.add(privateReligious);
+        preferences.add(privateCatholic);
+        preferences.add(privateIndependent);
+        preferences.add(football);
+        preferences.add(basketball);
+        preferences.add(soccer);
+        preferences.add(tennis);
+        preferences.add(notes);
 
         return "redirect:";
 
 
     }
+
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String displayAddForm(Model model) {
+        model.addAttribute("title", "Add School");
+        return "add";
+    }
+
 }
