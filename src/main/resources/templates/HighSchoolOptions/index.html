@@ -5,7 +5,10 @@
     <title th:text="${title}">Title</title>
 </head>
 <body>
+
     <h1 th:text="${title}">Default Title</h1>
+    <nav th:replace="fragments :: navigation"></nav>
+
     <a href="/survey">Survey</a>
     <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
     <ul>

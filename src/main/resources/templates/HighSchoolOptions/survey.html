@@ -6,6 +6,8 @@
 </head>
 <body>
     <h1 th:text="${title}"></h1>
+    <nav th:replace="fragments :: navigation"></nav>
+
     <form method = "post">
         <h2>What are you looking for in a high school?</h2>
 
