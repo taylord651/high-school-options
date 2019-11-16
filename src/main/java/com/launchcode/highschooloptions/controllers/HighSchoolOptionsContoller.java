@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +38,7 @@ public class HighSchoolOptionsContoller {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddForm(@RequestParam String schoolName, Model model) {
 
-        //
+        // Stores data entered in add form into ArrayList
         school_names.add(schoolName);
 
         // Redirect to /
@@ -49,7 +48,7 @@ public class HighSchoolOptionsContoller {
     @RequestMapping(value = "survey", method = RequestMethod.GET)
     public String displaySchoolSurveyForm(Model model) {
 
-        model.addAttribute("title", "School Options Survey");
+        model.addAttribute("title", "Survey");
         return "survey";
     }
 
