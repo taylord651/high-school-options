@@ -7,9 +7,33 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-    <p th:unless="${school_names} and ${school_names.size()}">No schools meet your criteria.</p>
-    <ul>
-        <li th:each="name : ${school_names}" th:text="${name}"></li>
-    </ul>
+    <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
+
+    <table class="table">
+
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Type</th>
+            <th>Minimum GPA</th>
+            <th>Minimum MAP Score</th>
+            <th>Specialty</th>
+            <th>Sports</th>
+        </tr>
+
+        <tr th:each="school : ${schools}">
+            <td th:text="${school.name}"></td>
+            <td th:text="${school.address}"></td>
+            <td th:text="${school.phone}"></td>
+            <td th:text="${school.type}"></td>
+            <td th:text="${school.gpa}"></td>
+            <td th:text="${school.map}"></td>
+            <td th:text="${school.specialty}"></td>
+            <td th:text="${school.sports}"></td>
+        </tr>
+
+    </table>
+
 </body>
 </html>

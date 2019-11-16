@@ -8,95 +8,104 @@
     <br>
 
     <form method = "post">
-        <section class="school name">
-            <label for="school_name" id="school_name">Name: </label>
-            <input type="text" name="schoolName"/>
+        <div class="form-group">
+            <label for="school_name">Name: </label>
+            <input class="form-control" type="text" id="school_name" name="schoolName"/>
 
-        </section>
+        </div>
         <hr>
-        <section class="school address">
-            <label for="school_address" id="school_address">Address: </label>
-            <input type="text" name="schoolAddress"/>
+        <div class="form-group">
+            <label for="school_address">Address: </label>
+            <input class="form-control" type="text" id="school_address" name="schoolAddress"/>
 
-        </section>
-        <hr>
-
-        <section class="school phone number">
-            <label for="phone_number" id="phone_number">Phone Number: </label>
-            <input type="text" name="phoneNumber"/>
-
-        </section>
+        </div>
         <hr>
 
-        <section class="school type">
-            <label for="school_type" id="school_type">Type: </label>
-            <select name="schoolType">
+        <div class="form-group">
+            <label for="phone_number">Phone Number: </label>
+            <input class="form-control" type="text" id="phone_number" name="schoolPhone"/>
+
+        </div>
+        <hr>
+
+        <div class="form-group">
+            <label for="school_type">Type: </label>
+            <select class="form-control" id="school_type" name="schoolType">
                 <option> </option>
-                <option value="public">Public</option>
-                <option value="private_religious">Private Religious</option>
-                <option value="private_independent">Private Independent</option>
+                <option value="Public">Public</option>
+                <option value="Private Religious">Private Religious</option>
+                <option value="Private Independent">Private Independent</option>
             </select>
 
-        </section>
+        </div>
         <hr>
 
-        <section class="GPA required">
-            <label for="gpa" id="gpa">Minimum GPA Required: </label>
-            <select name="gpa">
+        <div class="form-group">
+            <label for="gpa">Minimum GPA Required: </label>
+            <select class="form-control" id="gpa" name="schoolGpa">
                 <option> </option>
                 <option value="3.5 - 4.0">3.5 - 4.0</option>
                 <option value="3.0 - 3.5">3.0 - 3.5</option>
                 <option value="2.5 - 3.0">2.5 - 3.0 </option>
-                <option value="lower then 2.5">Lower than 2.5</option>
+                <option value="Lower then 2.5">Lower than 2.5</option>
             </select>
-        </section>
+        </div>
         <hr>
 
-        <section class="MAP">
-            <label for="map_score" id="map_score">Miminum MAP Score Required: </label>
-            <select name="mapScore">
+        <div class="form-group">
+            <label for="map_score">Miminum MAP Score Required: </label>
+            <select class="form-control" id="map_score" name="schoolMap">
                 <option> </option>
-                <option value="proficient_or_advanced">Proficient or Advanced</option>
-                <option value="basic">Basic </option>
-                <option value="below_basic">Below Basic</option>
+                <option value="Proficient or Advanced">Proficient or Advanced</option>
+                <option value="Basic">Basic </option>
+                <option value="Below Basic">Below Basic</option>
             </select>
 
-        </section>
+        </div>
         <hr>
 
-        <section class="specialty">
-            <label for="specialty" id="specialty">Specialty</label>
-            <select name="specialty">
+        <div class="form-group">
+            <label for="specialty">Specialty</label>
+            <select class="form-control" id="specialty" name="schoolSpecialty">
                 <option> </option>
                 <option value="STEM">STEM (Science, Technology, Engineering, and Math)</option>
                 <option value="Arts">Visual and Performing Arts</option>
                 <option value="General">General</option>
             </select>
 
-        </section>
+        </div>
         <hr>
 
-        <section class="sports">
+        <div class="form-group">
             <span>Sports <i>(check all that apply)</i></span>
-                <input type="checkbox" name="football" id="football" value="football">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="football" value="Football">
                     <label>Football</label>
-                <input type="checkbox" name="volleyball" id="volleyball" value="volleyball">
+                    <br>
+                <input type="checkbox" name="schoolSports" id="volleyball" value="Volleyball">
                     <label>Volleyball</label>
-                <input type="checkbox" name="baseball" id="baseball" value="baseball">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="baseball" value="Baseball">
                     <label>Baseball</label>
-                <input type="checkbox" name="soccer" id="soccer" value="soccer">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="soccer" value="Soccer">
                     <label>Soccer</label>
-                <input type="checkbox" name="basketball" id="basketball" value="basketball">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="basketball" value="Basketball">
                     <label>Basketball</label>
-                <input type="checkbox" name="swimming" id="swimming" value="swimming">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="swimming" value="Swimming">
                     <label>Swimming</label>
-                <input type="checkbox" name="wrestling" id="wrestling" value="wrestling">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="wrestling" value="Wrestling">
                     <label>Wrestling</label>
-                <input type="checkbox" name="cheerleading" id="cheerleading" value="cheerleading">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="cheerleading" value="Cheerleading">
                     <label>Cheerleading</label>
-                <input type="checkbox" name="dance" id="dance" value="dance">
+                    <br>
+            <input type="checkbox" name="schoolSports" id="dance" value="Dance">
                     <label>Dance</label>
-        </section>
+        </div>
         <hr>
 
         <input type="submit" value="Add School" />

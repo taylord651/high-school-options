@@ -1,5 +1,6 @@
 package com.launchcode.highschooloptions.controllers;
 
+import com.launchcode.highschooloptions.models.School;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Domonique Taylor
@@ -15,14 +17,14 @@ import java.util.ArrayList;
 @Controller
 public class HighSchoolOptionsContoller {
 
-    static ArrayList<String> school_names = new ArrayList<>();
+    static ArrayList<School> schools = new ArrayList<>();
 
 
     // Request path: / (index template (homepage))
     @RequestMapping (value = "")
     public String index(Model model) {
 
-        model.addAttribute("school_names", school_names);
+        model.addAttribute("schools", schools);
         model.addAttribute("title", "High School Options");
 
         return "index";
@@ -36,10 +38,15 @@ public class HighSchoolOptionsContoller {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddForm(@RequestParam String schoolName, Model model) {
+    public String processAddForm(@RequestParam String schoolName, @RequestParam String schoolAddress,
+                                 @RequestParam String schoolPhone, @RequestParam String schoolType,
+                                 @RequestParam String schoolGpa, @RequestParam String schoolMap,
+                                 @RequestParam String schoolSpecialty, @RequestParam String schoolSports) {
 
         // Stores data entered in add form into ArrayList
-        school_names.add(schoolName);
+        School newSchool = new School(schoolName, schoolAddress, schoolPhone, schoolType, schoolGpa,
+                schoolMap, schoolSpecialty, schoolSports);
+        schools.add(newSchool);
 
         // Redirect to /
         return "redirect:";
@@ -48,6 +55,7 @@ public class HighSchoolOptionsContoller {
     @RequestMapping(value = "survey", method = RequestMethod.GET)
     public String displaySchoolSurveyForm(Model model) {
 
+        model.addAttribute("schools", schools);
         model.addAttribute("title", "Survey");
         return "survey";
     }
