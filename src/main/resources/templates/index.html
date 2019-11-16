@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
+<head th:replace="fragments :: head">
     <meta charset="UTF-8"/>
     <title th:text="${title}">Title</title>
 </head>
-<body>
+<body class="container">
 
     <h1 th:text="${title}">Default Title</h1>
+
     <nav th:replace="fragments :: navigation"></nav>
 
-    <a href="/survey">Survey</a>
-    <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
+    <p th:unless="${school_names} and ${school_names.size()}">No schools meet your criteria.</p>
     <ul>
-        <li th:each="school : ${schools}" th:text="${school}"></li>
+        <li th:each="name : ${school_names}" th:text="${name}"></li>
     </ul>
 </body>
 </html>

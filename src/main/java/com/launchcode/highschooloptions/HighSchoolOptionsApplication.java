@@ -1,4 +1,4 @@
-package com.launchcode.highschooloptions.controllers;
+package com.launchcode.highschooloptions;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

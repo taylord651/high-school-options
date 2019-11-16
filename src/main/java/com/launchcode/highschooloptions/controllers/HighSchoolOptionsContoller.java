@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**
@@ -15,19 +16,34 @@ import java.util.ArrayList;
 @Controller
 public class HighSchoolOptionsContoller {
 
-    static ArrayList<String> schools = new ArrayList<>();
-
-    static ArrayList<String> preferences = new ArrayList<>();
+    static ArrayList<String> school_names = new ArrayList<>();
 
 
-    // Request path: /options
+    // Request path: / (index template (homepage))
     @RequestMapping (value = "")
     public String index(Model model) {
 
-        model.addAttribute("schools", schools);
+        model.addAttribute("school_names", school_names);
         model.addAttribute("title", "High School Options");
 
         return "index";
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String displayAddForm(Model model) {
+
+        model.addAttribute("title", "Add School");
+        return "add";
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String processAddForm(@RequestParam String schoolName, Model model) {
+
+        //
+        school_names.add(schoolName);
+
+        // Redirect to /
+        return "redirect:";
     }
 
     @RequestMapping(value = "survey", method = RequestMethod.GET)
@@ -45,26 +61,9 @@ public class HighSchoolOptionsContoller {
 
         model.addAttribute("preferences", "Your Preferences");
 
-        preferences.add(schoolType);
-        preferences.add(publicSchool);
-        preferences.add(privateReligious);
-        preferences.add(privateCatholic);
-        preferences.add(privateIndependent);
-        preferences.add(football);
-        preferences.add(basketball);
-        preferences.add(soccer);
-        preferences.add(tennis);
-        preferences.add(notes);
-
         return "redirect:";
 
 
-    }
-
-    @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddForm(Model model) {
-        model.addAttribute("title", "Add School");
-        return "add";
     }
 
 }

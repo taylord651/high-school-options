@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body>
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Title</title>
+</head>
+<body class="container">
     <h1 th:text="${title}">Title</h1>
     <nav th:replace="fragments :: navigation"></nav>
 
-    <nav th:replace="fragments :: navigation"></nav>
     <br>
 
     <form method = "post">
         <section class="school name">
             <label for="school_name" id="school_name">Name: </label>
-            <textarea name="school_name"></textarea>
+            <input type="text" name="schoolName"/>
 
         </section>
         <hr>
         <section class="school address">
             <label for="school_address" id="school_address">Address: </label>
-            <textarea name="school address"></textarea>
+            <input type="text" name="schoolAddress"/>
 
         </section>
         <hr>
 
         <section class="school phone number">
             <label for="phone_number" id="phone_number">Phone Number: </label>
-            <textarea name="phone_number"></textarea>
+            <input type="text" name="phoneNumber"/>
 
         </section>
         <hr>
 
         <section class="school type">
-            <label name="school_type" id="school_type">Type: </label>
-            <select for="school_type">
+            <label for="school_type" id="school_type">Type: </label>
+            <select name="schoolType">
                 <option> </option>
                 <option value="public">Public</option>
                 <option value="private_religious">Private Religious</option>
@@ -42,7 +44,7 @@
         <hr>
 
         <section class="GPA required">
-            <label name="gpa" id="gpa">Minimum GPA Required: </label>
+            <label for="gpa" id="gpa">Minimum GPA Required: </label>
             <select name="gpa">
                 <option> </option>
                 <option value="3.5 - 4.0">3.5 - 4.0</option>
@@ -55,7 +57,7 @@
 
         <section class="MAP">
             <label for="map_score" id="map_score">Miminum MAP Score Required: </label>
-            <select name="map_score">
+            <select name="mapScore">
                 <option> </option>
                 <option value="proficient_or_advanced">Proficient or Advanced</option>
                 <option value="basic">Basic </option>
@@ -71,7 +73,7 @@
                 <option> </option>
                 <option value="STEM">STEM (Science, Technology, Engineering, and Math)</option>
                 <option value="Arts">Visual and Performing Arts</option>
-                <option value="general">General <i>(may include STEM and Visual and Performing Arts</i></option>
+                <option value="General">General</option>
             </select>
 
         </section>
@@ -100,7 +102,7 @@
         </section>
         <hr>
 
-        <input type="submit" value="Submit Survey" />
+        <input type="submit" value="Add School" />
 
     </form>
 
