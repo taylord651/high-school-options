@@ -9,8 +9,11 @@ public class School {
     private String map;
     private String specialty;
     private String sports;
+    private int schoolId;
+    private static int nextId = 1;
 
     public School(String name, String address, String phone, String type, String gpa, String map, String specialty, String sports) {
+        this();
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -19,6 +22,19 @@ public class School {
         this.map = map;
         this.specialty = specialty;
         this.sports = sports;
+    }
+
+    public School() {
+        schoolId = nextId;
+        nextId++;
+    }
+
+    public int getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(int schoolId) {
+        this.schoolId = schoolId;
     }
 
     public String getName() {

@@ -28,7 +28,7 @@
 
        <!--  <label th:for="${school}" th:text="${school}"></label> -->
         <tr th:each="school : ${schools}">
-            <td> <input type="checkbox" name="school" th:value="${school}" th:id="${school}"/> </td>
+            <td> <input type="checkbox" name="schoolIds" th:value="${school.schoolId}" th:id="${school.schoolId}"/> </td>
             <td th:text="${school.name}"></td>
             <td th:text="${school.address}"></td>
             <td th:text="${school.phone}"></td>
