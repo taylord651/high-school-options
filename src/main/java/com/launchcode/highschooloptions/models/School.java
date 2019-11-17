@@ -17,21 +17,13 @@ public class School {
     @Size(min=10, max=14, message = "Phone number must include area code and be formatted as 123-456-7890")
     private String phone;
 
-    @NotNull
-    @Size(message = "Select a type of school")
-    private String type;
+    private SchoolType type;
 
-    @NotNull
-    @Size(message = "Select a GPA range")
-    private String gpa;
+    private SchoolGpa gpa;
 
-    @NotNull
-    @Size(message = "Select the minimum MAP score required for acceptance")
-    private String map;
+    private SchoolMap map;
 
-    @NotNull
-    @Size(message = "Select a specialty")
-    private String specialty;
+    private SchoolSpecialty specialty;
 
     @NotNull
     @Size(message = "Select sports offered at school")
@@ -40,15 +32,11 @@ public class School {
     private int schoolId;
     private static int nextId = 1;
 
-    public School(String name, String address, String phone, String type, String gpa, String map, String specialty, String sports) {
+    public School(String name, String address, String phone, String sports) {
         this();
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.type = type;
-        this.gpa = gpa;
-        this.map = map;
-        this.specialty = specialty;
         this.sports = sports;
     }
 
@@ -89,43 +77,43 @@ public class School {
         this.phone = phone;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getGpa() {
-        return gpa;
-    }
-
-    public void setGpa(String gpa) {
-        this.gpa = gpa;
-    }
-
-    public String getMap() {
-        return map;
-    }
-
-    public void setMap(String map) {
-        this.map = map;
-    }
-
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
     public String getSports() {
         return sports;
     }
 
     public void setSports(String sports) {
         this.sports = sports;
+    }
+
+    public SchoolType getType() {
+        return type;
+    }
+
+    public void setType(SchoolType type) {
+        this.type = type;
+    }
+
+    public SchoolGpa getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(SchoolGpa gpa) {
+        this.gpa = gpa;
+    }
+
+    public SchoolMap getMap() {
+        return map;
+    }
+
+    public void setMap(SchoolMap map) {
+        this.map = map;
+    }
+
+    public SchoolSpecialty getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(SchoolSpecialty specialty) {
+        this.specialty = specialty;
     }
 }

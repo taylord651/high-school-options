@@ -10,7 +10,7 @@
 <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
 
 <form method="post">
-<table>
+<table class="table">
 
     <tr>
         <th>Remove</th>
@@ -32,11 +32,11 @@
             <td th:text="${school.name}"></td>
             <td th:text="${school.address}"></td>
             <td th:text="${school.phone}"></td>
-            <td th:text="${school.type}"></td>
-            <td th:text="${school.gpa}"></td>
-            <td th:text="${school.map}"></td>
-            <td th:text="${school.specialty}"></td>
-            <td th:text="${school.sports}"></td>
+            <td th:text="${school.type.name}"></td>
+            <td th:text="${school.gpa.name}"></td>
+            <td th:text="${school.map.name}"></td>
+            <td th:text="${school.specialty.name}"></td>
+            <td th:text="${school.sports}"> </td>
         </tr>
     </div>
 </table>

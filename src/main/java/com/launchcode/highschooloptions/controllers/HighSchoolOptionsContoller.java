@@ -1,7 +1,6 @@
 package com.launchcode.highschooloptions.controllers;
 
-import com.launchcode.highschooloptions.models.School;
-import com.launchcode.highschooloptions.models.SchoolData;
+import com.launchcode.highschooloptions.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -35,7 +34,12 @@ public class HighSchoolOptionsContoller {
 
         model.addAttribute("title", "Add School");
         model.addAttribute(new School());
+        model.addAttribute("schoolTypes", SchoolType.values());
+        model.addAttribute("schoolGpas", SchoolGpa.values());
+        model.addAttribute("schoolMaps", SchoolMap.values());
+        model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
         return "add";
+
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)

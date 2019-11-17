@@ -30,11 +30,10 @@
 
         <div class="form-group">
             <label th:for="type">Type: </label>
-            <select class="form-control" th:field="*{type}">
-                <option value=""> </option>
-                <option value="Public">Public</option>
-                <option value="Private Religious">Private Religious</option>
-                <option value="Private Independent">Private Independent</option>
+            <select th:field="*{type}" class="form-control">
+                <option th:each="schoolType : ${schoolTypes}"
+                        th:text="${schoolType.name}"
+                        th:value="${schoolType}"></option>
             </select>
             <span th:errors="*{type}" class="error"></span>
         </div>
@@ -43,23 +42,20 @@
         <div class="form-group">
             <label th:for="gpa">Minimum GPA Required: </label>
             <select class="form-control" th:field="*{gpa}">
-                <option value=""> </option>
-                <option value="3.5 - 4.0">3.5 - 4.0</option>
-                <option value="3.0 - 3.5">3.0 - 3.5</option>
-                <option value="2.5 - 3.0">2.5 - 3.0 </option>
-                <option value="Lower then 2.5">Lower than 2.5</option>
+                <option th:each="schoolGpa : ${schoolGpas}"
+                        th:text="${schoolGpa.name}"
+                        th:value="${schoolGpa}"> </option>
             </select>
             <span th:errors="*{gpa}" class="error"></span>
         </div>
         <hr>
 
         <div class="form-group">
-            <label th:for="map">Miminum MAP Score Required: </label>
+            <label th:for="map">Minimum MAP Score Required: </label>
             <select class="form-control" th:field="*{map}">
-                <option value=""> </option>
-                <option value="Proficient or Advanced">Proficient or Advanced</option>
-                <option value="Basic">Basic </option>
-                <option value="Below Basic">Below Basic</option>
+                <option th:each="schoolMap : ${schoolMaps}"
+                        th:text="${schoolMap.name}"
+                        th:value="${schoolMap}"> </option>
             </select>
             <span th:errors="*{map}" class="error"></span>
         </div>
@@ -68,10 +64,9 @@
         <div class="form-group">
             <label th:for="specialty">Specialty</label>
             <select class="form-control" th:field="*{specialty}">
-                <option value=""> </option>
-                <option value="STEM">STEM (Science, Technology, Engineering, and Math)</option>
-                <option value="Arts">Visual and Performing Arts</option>
-                <option value="General">General</option>
+                <option th:each="schoolSpecialty : ${schoolSpecialties}"
+                        th:text="${schoolSpecialty.name}"
+                        th:value="${schoolSpecialty}"> </option>
             </select>
             <span th:errors="*{specialty}" class="error"></span>
         </div>
