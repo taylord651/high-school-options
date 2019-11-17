@@ -7,104 +7,107 @@
 
     <br>
 
-    <form method = "post">
+    <form method = "post" th:object="${school}">
         <div class="form-group">
-            <label for="school_name">Name: </label>
-            <input class="form-control" type="text" id="school_name" name="name"/>
-
+            <label th:for="name">Name: </label>
+            <input class="form-control" th:field="*{name}"/>
+            <span th:errors="*{name}" class="error"></span>
         </div>
         <hr>
         <div class="form-group">
-            <label for="school_address">Address: </label>
-            <input class="form-control" type="text" id="school_address" name="address"/>
-
-        </div>
-        <hr>
-
-        <div class="form-group">
-            <label for="phone_number">Phone Number: </label>
-            <input class="form-control" type="text" id="phone_number" name="phone"/>
-
+            <label th:for="address">Address: </label>
+            <input class="form-control" th:field="*{address}"/>
+            <span th:errors="*{address}" class="error"></span>
         </div>
         <hr>
 
         <div class="form-group">
-            <label for="school_type">Type: </label>
-            <select class="form-control" id="school_type" name="type">
-                <option> </option>
+            <label th:for="phone">Phone Number: </label>
+            <input class="form-control" th:field="*{phone}"/>
+            <span th:errors="*{phone}" class="error"></span>
+        </div>
+        <hr>
+
+        <div class="form-group">
+            <label th:for="type">Type: </label>
+            <select class="form-control" th:field="*{type}">
+                <option value=""> </option>
                 <option value="Public">Public</option>
                 <option value="Private Religious">Private Religious</option>
                 <option value="Private Independent">Private Independent</option>
             </select>
-
+            <span th:errors="*{type}" class="error"></span>
         </div>
         <hr>
 
         <div class="form-group">
-            <label for="gpa">Minimum GPA Required: </label>
-            <select class="form-control" id="gpa" name="gpa">
-                <option> </option>
+            <label th:for="gpa">Minimum GPA Required: </label>
+            <select class="form-control" th:field="*{gpa}">
+                <option value=""> </option>
                 <option value="3.5 - 4.0">3.5 - 4.0</option>
                 <option value="3.0 - 3.5">3.0 - 3.5</option>
                 <option value="2.5 - 3.0">2.5 - 3.0 </option>
                 <option value="Lower then 2.5">Lower than 2.5</option>
             </select>
+            <span th:errors="*{gpa}" class="error"></span>
         </div>
         <hr>
 
         <div class="form-group">
-            <label for="map_score">Miminum MAP Score Required: </label>
-            <select class="form-control" id="map_score" name="map">
-                <option> </option>
+            <label th:for="map">Miminum MAP Score Required: </label>
+            <select class="form-control" th:field="*{map}">
+                <option value=""> </option>
                 <option value="Proficient or Advanced">Proficient or Advanced</option>
                 <option value="Basic">Basic </option>
                 <option value="Below Basic">Below Basic</option>
             </select>
-
+            <span th:errors="*{map}" class="error"></span>
         </div>
         <hr>
 
         <div class="form-group">
-            <label for="specialty">Specialty</label>
-            <select class="form-control" id="specialty" name="specialty">
-                <option> </option>
+            <label th:for="specialty">Specialty</label>
+            <select class="form-control" th:field="*{specialty}">
+                <option value=""> </option>
                 <option value="STEM">STEM (Science, Technology, Engineering, and Math)</option>
                 <option value="Arts">Visual and Performing Arts</option>
                 <option value="General">General</option>
             </select>
-
+            <span th:errors="*{specialty}" class="error"></span>
         </div>
         <hr>
 
         <div class="form-group">
             <span>Sports <i>(check all that apply)</i></span>
                     <br>
-            <input type="checkbox" name="sports" id="football" value="Football">
-                    <label>Football</label>
+                <input type="checkbox" name="sports" id="football" value="Football">
+                <label>Football</label>
                     <br>
                 <input type="checkbox" name="sports" id="volleyball" value="Volleyball">
-                    <label>Volleyball</label>
+                <label>Volleyball</label>
                     <br>
-            <input type="checkbox" name="sports" id="baseball" value="Baseball">
-                    <label>Baseball</label>
+                <input type="checkbox" name="sports" id="baseball" value="Baseball">
+                <label>Baseball</label>
                     <br>
-            <input type="checkbox" name="sports" id="soccer" value="Soccer">
-                    <label>Soccer</label>
+                <input type="checkbox" name="sports" id="soccer" value="Soccer">
+                <label>Soccer</label>
                     <br>
-            <input type="checkbox" name="sports" id="basketball" value="Basketball">
-                    <label>Basketball</label>
+                <input type="checkbox" name="sports" id="basketball" value="Basketball">
+                <label>Basketball</label>
                     <br>
-            <input type="checkbox" name="sports" id="swimming" value="Swimming">
-                    <label>Swimming</label>
+                <input type="checkbox" name="sports" id="swimming" value="Swimming">
+                <label>Swimming</label>
                     <br>
-            <input type="checkbox" name="sports" id="wrestling" value="Wrestling">
-                    <label>Wrestling</label>
+                <input type="checkbox" name="sports" id="wrestling" value="Wrestling">
+                <label>Wrestling</label>
                     <br>
-            <input type="checkbox" name="sports" id="cheerleading" value="Cheerleading">
-                    <label>Cheerleading</label>
+                <input type="checkbox" name="sports" id="cheerleading" value="Cheerleading">
+                <label>Cheerleading</label>
                     <br>
-            <input type="checkbox" name="sports" id="dance" value="Dance">
-                    <label>Dance</label>
+                <input type="checkbox" name="sports" id="dance" value="Dance">
+                <label>Dance</label>
+            <span th:errors="*{sports}" class="error"></span>
+
         </div>
         <hr>
 

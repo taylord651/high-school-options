@@ -4,11 +4,13 @@ import com.launchcode.highschooloptions.models.School;
 import com.launchcode.highschooloptions.models.SchoolData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 /**
@@ -32,11 +34,18 @@ public class HighSchoolOptionsContoller {
     public String displayAddForm(Model model) {
 
         model.addAttribute("title", "Add School");
+        model.addAttribute(new School());
         return "add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddForm(@ModelAttribute School newSchool) {
+    public String processAddForm(@ModelAttribute @Valid School newSchool,
+                                 Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add School");
+            return "add";
+        }
 
         SchoolData.add(newSchool);
 

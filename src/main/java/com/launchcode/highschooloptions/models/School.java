@@ -1,14 +1,42 @@
 package com.launchcode.highschooloptions.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class School {
+
+    @NotNull
+    @Size(min=3, max=50, message = "Name must be between 3 and 50 characters")
     private String name;
+
+    @NotNull
+    @Size(min=3, max=50, message = "Address must be between 3 and 50 characters")
     private String address;
+
+    @NotNull
+    @Size(min=10, max=14, message = "Phone number must include area code and be formatted as 123-456-7890")
     private String phone;
+
+    @NotNull
+    @Size(message = "Select a type of school")
     private String type;
+
+    @NotNull
+    @Size(message = "Select a GPA range")
     private String gpa;
+
+    @NotNull
+    @Size(message = "Select the minimum MAP score required for acceptance")
     private String map;
+
+    @NotNull
+    @Size(message = "Select a specialty")
     private String specialty;
+
+    @NotNull
+    @Size(message = "Select sports offered at school")
     private String sports;
+
     private int schoolId;
     private static int nextId = 1;
 
