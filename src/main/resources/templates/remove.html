@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
+
+<form method="post">
+<table>
+
+    <tr>
+        <th>Remove</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Type</th>
+        <th>Minimum GPA</th>
+        <th>Minimum MAP Score</th>
+        <th>Specialty</th>
+        <th>Sports</th>
+    </tr>
+
+    <div>
+
+       <!--  <label th:for="${school}" th:text="${school}"></label> -->
+        <tr th:each="school : ${schools}">
+            <td> <input type="checkbox" name="school" th:value="${school}" th:id="${school}"/> </td>
+            <td th:text="${school.name}"></td>
+            <td th:text="${school.address}"></td>
+            <td th:text="${school.phone}"></td>
+            <td th:text="${school.type}"></td>
+            <td th:text="${school.gpa}"></td>
+            <td th:text="${school.map}"></td>
+            <td th:text="${school.specialty}"></td>
+            <td th:text="${school.sports}"></td>
+        </tr>
+    </div>
+</table>
+
+    <input type="submit" value="Remove School" />
+
+</form>
+
+</body>
+</html>

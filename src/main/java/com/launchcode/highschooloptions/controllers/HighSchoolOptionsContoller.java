@@ -52,6 +52,23 @@ public class HighSchoolOptionsContoller {
         return "redirect:";
     }
 
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveSchoolForm(Model model) {
+        model.addAttribute("schools", schools);
+        model.addAttribute("title", "Remove School");
+        return "remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveSchoolForm(@RequestParam ArrayList<String> school) {
+
+        for (String aSchool : school) {
+            schools.remove(aSchool);
+        }
+
+        return "redirect:";
+    }
+
     @RequestMapping(value = "survey", method = RequestMethod.GET)
     public String displaySchoolSurveyForm(Model model) {
 
