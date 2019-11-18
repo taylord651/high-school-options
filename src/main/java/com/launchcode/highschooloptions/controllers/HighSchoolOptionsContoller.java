@@ -1,6 +1,8 @@
 package com.launchcode.highschooloptions.controllers;
 
 import com.launchcode.highschooloptions.models.*;
+import com.launchcode.highschooloptions.models.data.SchoolDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,11 +21,14 @@ import java.util.ArrayList;
 @Controller
 public class HighSchoolOptionsContoller {
 
+    @Autowired
+    private SchoolDao schoolDao;
+
     // Request path: / (index template (homepage))
     @RequestMapping (value = "")
     public String index(Model model) {
 
-        model.addAttribute("schools", SchoolData.getAll());
+        model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "High School Options");
 
         return "index";
@@ -51,7 +56,7 @@ public class HighSchoolOptionsContoller {
             return "add";
         }
 
-        SchoolData.add(newSchool);
+        schoolDao.save(newSchool);
 
         // Redirect to /
         return "redirect:";
@@ -59,7 +64,7 @@ public class HighSchoolOptionsContoller {
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveSchoolForm(Model model) {
-        model.addAttribute("schools", SchoolData.getAll());
+        model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "Remove School");
         return "remove";
     }
@@ -68,7 +73,7 @@ public class HighSchoolOptionsContoller {
     public String processRemoveSchoolForm(@RequestParam int[] schoolIds) {
 
         for (int schoolId : schoolIds) {
-            SchoolData.remove(schoolId);
+            schoolDao.deleteById(schoolId);
         }
 
         return "redirect:";
@@ -77,7 +82,7 @@ public class HighSchoolOptionsContoller {
     @RequestMapping(value = "survey", method = RequestMethod.GET)
     public String displaySchoolSurveyForm(Model model) {
 
-        model.addAttribute("schools", SchoolData.getAll());
+        model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "Survey");
         return "survey";
     }

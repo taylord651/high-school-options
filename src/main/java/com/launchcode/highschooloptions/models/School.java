@@ -1,9 +1,19 @@
 package com.launchcode.highschooloptions.models;
 
+import com.sun.javafx.beans.IDProperty;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class School {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Size(min=3, max=50, message = "Name must be between 3 and 50 characters")
@@ -29,28 +39,17 @@ public class School {
     @Size(message = "Select sports offered at school")
     private String sports;
 
-    private int schoolId;
-    private static int nextId = 1;
-
     public School(String name, String address, String phone, String sports) {
-        this();
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.sports = sports;
     }
 
-    public School() {
-        schoolId = nextId;
-        nextId++;
-    }
+    public School() {}
 
-    public int getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(int schoolId) {
-        this.schoolId = schoolId;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
