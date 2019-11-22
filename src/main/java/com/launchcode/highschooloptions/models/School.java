@@ -16,7 +16,7 @@ public class School {
     private int id;
 
     @NotNull
-    @Size(min=3, max=50, message = "Name must be between 3 and 50 characters")
+    @Size(min=3, max=70, message = "Name must be between 3 and 50 characters")
     private String name;
 
     @NotNull
@@ -35,8 +35,7 @@ public class School {
 
     private SchoolSpecialty specialty;
 
-    @NotNull
-    @Size(message = "Select sports offered at school")
+    @NotNull(message = "Select sports offered at school")
     private String sports;
 
     public School(String name, String address, String phone, String sports) {

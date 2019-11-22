@@ -53,6 +53,10 @@ public class HighSchoolOptionsContoller {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add School");
+            model.addAttribute("schoolTypes", SchoolType.values());
+            model.addAttribute("schoolGpas", SchoolGpa.values());
+            model.addAttribute("schoolMaps", SchoolMap.values());
+            model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
             return "add";
         }
 

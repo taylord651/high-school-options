@@ -75,7 +75,9 @@
         <div class="form-group">
             <span>Sports <i>(check all that apply)</i></span>
                     <br>
-                <input type="checkbox" name="sports" id="football" value="Football">
+            <span th:errors="*{sports}" class="error"></span>
+                    <br>
+            <input type="checkbox" name="sports" id="football" value="Football">
                 <label>Football</label>
                     <br>
                 <input type="checkbox" name="sports" id="volleyball" value="Volleyball">
@@ -101,8 +103,9 @@
                     <br>
                 <input type="checkbox" name="sports" id="dance" value="Dance">
                 <label>Dance</label>
-            <span th:errors="*{sports}" class="error"></span>
-
+                    <br>
+                <input type="checkbox" name="sports" id="track" value="Dance">
+                <label>Track</label>
         </div>
         <hr>
 
