@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+
+<ul th:each="gpa : ${gpas}">
+    <li th:text="${gpa.name}">Name</li>
+</ul>
+<span th:errors="*{name}" class="error"></span>
+
+<a href="gpa/add">Add GPA</a>
+
+</body>
+</html>

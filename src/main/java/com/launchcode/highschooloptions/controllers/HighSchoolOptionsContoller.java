@@ -1,7 +1,9 @@
 package com.launchcode.highschooloptions.controllers;
 
+import com.launchcode.highschooloptions.forms.School;
 import com.launchcode.highschooloptions.models.*;
 import com.launchcode.highschooloptions.models.data.SchoolDao;
+import com.launchcode.highschooloptions.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,17 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 /**
  * Created by Domonique Taylor
  */
 
+@RequestMapping("school")
 @Controller
 public class HighSchoolOptionsContoller {
 
     @Autowired
     private SchoolDao schoolDao;
+
+    @Autowired
+    private UserDao userDao;
 
     // Request path: / (index template (homepage))
     @RequestMapping (value = "")
@@ -31,7 +36,7 @@ public class HighSchoolOptionsContoller {
         model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "High School Options");
 
-        return "index";
+        return "school/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -43,7 +48,7 @@ public class HighSchoolOptionsContoller {
         model.addAttribute("schoolGpas", SchoolGpa.values());
         model.addAttribute("schoolMaps", SchoolMap.values());
         model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
-        return "add";
+        return "school/add";
 
     }
 
@@ -57,7 +62,7 @@ public class HighSchoolOptionsContoller {
             model.addAttribute("schoolGpas", SchoolGpa.values());
             model.addAttribute("schoolMaps", SchoolMap.values());
             model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
-            return "add";
+            return "school/add";
         }
 
         schoolDao.save(newSchool);
@@ -70,7 +75,7 @@ public class HighSchoolOptionsContoller {
     public String displayRemoveSchoolForm(Model model) {
         model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "Remove School");
-        return "remove";
+        return "school/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
@@ -88,7 +93,7 @@ public class HighSchoolOptionsContoller {
 
         model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "Survey");
-        return "survey";
+        return "school/survey";
     }
 
     @RequestMapping(value = "survey", method = RequestMethod.POST)

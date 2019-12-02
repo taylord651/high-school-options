@@ -7,6 +7,9 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
+    <a href="/school/add">Add</a> |
+    <a href="/school/remove">Remove</a>
+
     <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
 
     <table class="table">

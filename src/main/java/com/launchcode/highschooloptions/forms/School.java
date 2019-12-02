@@ -1,10 +1,8 @@
-package com.launchcode.highschooloptions.models;
+package com.launchcode.highschooloptions.forms;
 
-import com.sun.javafx.beans.IDProperty;
+import com.launchcode.highschooloptions.models.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,6 +35,9 @@ public class School {
 
     @NotNull(message = "Select sports offered at school")
     private String sports;
+
+    @ManyToOne
+    private User user;
 
     public School(String name, String address, String phone, String sports) {
         this.name = name;
@@ -114,4 +115,9 @@ public class School {
     public void setSpecialty(SchoolSpecialty specialty) {
         this.specialty = specialty;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
