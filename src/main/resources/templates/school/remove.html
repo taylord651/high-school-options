@@ -31,6 +31,7 @@
             <td> <input type="checkbox" name="schoolIds" th:value="${school.id}" th:id="${school.id}"/> </td>
             <td th:for="${school.id}" th:text="${school.name}"></td>
             <td th:for="${school.id}" th:text="${school.address}"></td>
+            <td th:for="${school.id}"> <a th:text="${school.website}" th:href="@{${school.website}}"></a></td>
             <td th:for="${school.id}" th:text="${school.phone}"></td>
             <td th:for="${school.id}" th:text="${school.type.name}"></td>
             <td th:for="${school.id}" th:text="${school.gpa.name}"></td>

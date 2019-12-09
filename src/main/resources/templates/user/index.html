@@ -6,19 +6,22 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" style="max-width:600px" th:object="${user}">
+<form method="post" style="max-width:600px">
     <br>
     <p>Don't have an account? <a href="user/new">Create one!</a></p>
+    <span th:text="${password_error}" class="error"></span>
+    <span th:text="${error_message}" class="error"></span>
+    <span th:text="${username_error}" class="error"></span>
+    <span th:text="${password_error}" class="error"></span>
+
     <div>
         <label th:for="name"> Username:</label>
-        <input class="form-control" id="name" name="name">
-        <span errors="*{name}" class="error"></span>
+        <input class="form-control" name="name" id="name"/>
     </div>
     <br>
     <div>
         <label th:for="password"> Password:</label>
-        <input class="form-control" id="password" name="password"/>
-        <span errors="*{password}" class="error"></span>
+        <input class="form-control" name="password" id="password"/>
     </div>
     <br>
     <div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Controller
 @RequestMapping("user")
@@ -22,7 +23,7 @@ public class UserController {
     private UserDao userDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index(Model model) {
+    public String displayLoginForm (Model model) {
 
         model.addAttribute("title", "Login");
 
@@ -30,20 +31,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String login(Model model, @ModelAttribute @Valid User user, Errors errors,
-                        @RequestParam String name, String password) {
+    public String processLoginForm (Model model, @ModelAttribute @Valid User user, Errors errors,
+                                    @RequestParam String name, String password) {
 
-        userDao.findAll();
+        //userDao.findAll();
+        User login_user = userDao.findByName(name);
 
-        /* if name is not found in database
-            model.addAttribute( "error_message", "Username does not exist. Create an account"
+        boolean valid_username = name.length() >= 1;
+        boolean valid_password = password.length() >= 1;
 
-            if user.name.id != password.name.id
-            model.addAttribute( "error_message", "Incorrect password");
-         */
-
-        if (errors.hasErrors()) {
+        if (!valid_username) {
             model.addAttribute("title", "Login");
+            model.addAttribute("error_message", "Username required");
+            return "user/index";
+        } else if (!valid_password) {
+            model.addAttribute("title", "Login");
+            model.addAttribute("error_message", "Password required");
+            return "user/index";
+        } else if (login_user == null) {
+            model.addAttribute("title", "Login");
+            model.addAttribute("username_error", "Username not found. Create an account.");
+            return "user/index";
+        } else if (!password.equals(login_user.getPassword())) {
+            model.addAttribute("title", "Login");
+            model.addAttribute("password_error", "Incorrect password");
             return "user/index";
         } else {
             return "redirect:/school";

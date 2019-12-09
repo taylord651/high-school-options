@@ -36,14 +36,20 @@ public class School {
     @NotNull(message = "Select sports offered at school")
     private String sports;
 
+    @NotNull
+    @NotNull
+    @Size(min=7, message = "Please include school website")
+    private String website;
+
     @ManyToOne
     private User user;
 
-    public School(String name, String address, String phone, String sports) {
+    public School(String name, String address, String phone, String sports, String website) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.sports = sports;
+        this.website = website;
     }
 
     public School() {}
@@ -120,4 +126,11 @@ public class School {
         this.user = user;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 }

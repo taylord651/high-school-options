@@ -88,25 +88,5 @@ public class HighSchoolOptionsContoller {
         return "redirect:";
     }
 
-    @RequestMapping(value = "survey", method = RequestMethod.GET)
-    public String displaySchoolSurveyForm(Model model) {
-
-        model.addAttribute("schools", schoolDao.findAll());
-        model.addAttribute("title", "Survey");
-        return "school/survey";
-    }
-
-    @RequestMapping(value = "survey", method = RequestMethod.POST)
-    public String processSchoolSurveyForm(Model model, @RequestParam String schoolType, String publicSchool,
-                                          String privateReligious, String privateCatholic,
-                                          String privateIndependent, String football, String basketball,
-                                          String soccer, String tennis, String notes) {
-
-        model.addAttribute("preferences", "Your Preferences");
-
-        return "redirect:";
-
-
-    }
 
 }

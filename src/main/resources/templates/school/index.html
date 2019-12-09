@@ -15,9 +15,11 @@
     <table class="table">
 
         <tr>
+            <th>Add to My Schools</th>
             <th>Name</th>
             <th>Address</th>
             <th>Phone Number</th>
+            <th>Website</th>
             <th>Type</th>
             <th>Minimum GPA</th>
             <th>Minimum MAP Score</th>
@@ -26,9 +28,11 @@
         </tr>
 
         <tr th:each="school : ${schools}">
+            <td> <input type="checkbox" name="schoolIds" th:value="${school.id}" th:id="${school.id}"/> </td>
             <td th:text="${school.name}"></td>
             <td th:text="${school.address}"></td>
             <td th:text="${school.phone}"></td>
+            <td> <a th:text="${school.website}" th:href="@{${school.website}}"></a></td>
             <td th:text="${school.type.name}"></td>
             <td th:text="${school.gpa.name}"></td>
             <td th:text="${school.map.name}"></td>
@@ -37,6 +41,6 @@
         </tr>
 
     </table>
-
+    <input class="form-control" type="submit" value="Add to My Schools" />
 </body>
 </html>
