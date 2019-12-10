@@ -6,6 +6,9 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
+<a href="/user/new">Create Account</a> |
+<a href="/user/all-users">Users</a>
+
 <form method="post" style="max-width:600px">
     <br>
     <p>Don't have an account? <a href="user/new">Create one!</a></p>

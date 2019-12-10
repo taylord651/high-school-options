@@ -15,7 +15,7 @@
     <table class="table">
 
         <tr>
-            <th>Add to My Schools</th>
+            <!-- <th>Add to My Schools</th> -->
             <th>Name</th>
             <th>Address</th>
             <th>Phone Number</th>
@@ -28,7 +28,7 @@
         </tr>
 
         <tr th:each="school : ${schools}">
-            <td> <input type="checkbox" name="schoolIds" th:value="${school.id}" th:id="${school.id}"/> </td>
+           <!-- <td> <input type="checkbox" name="schoolIds" th:value="${school.id}" th:id="${school.id}"/> </td> -->
             <td th:text="${school.name}"></td>
             <td th:text="${school.address}"></td>
             <td th:text="${school.phone}"></td>
@@ -41,6 +41,6 @@
         </tr>
 
     </table>
-    <input class="form-control" type="submit" value="Add to My Schools" />
+    <!-- <input class="form-control" type="submit" value="Add to My Schools" /> -->
 </body>
 </html>

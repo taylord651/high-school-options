@@ -1,10 +1,9 @@
-package com.launchcode.highschooloptions.forms;
-
-import com.launchcode.highschooloptions.models.*;
+package com.launchcode.highschooloptions.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class School {
@@ -41,8 +40,8 @@ public class School {
     @Size(min=7, message = "Please include school website")
     private String website;
 
-    @ManyToOne
-    private User user;
+    @ManyToMany(mappedBy = "schools")
+    private List<User> users;
 
     public School(String name, String address, String phone, String sports, String website) {
         this.name = name;
@@ -120,10 +119,6 @@ public class School {
 
     public void setSpecialty(SchoolSpecialty specialty) {
         this.specialty = specialty;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getWebsite() {
