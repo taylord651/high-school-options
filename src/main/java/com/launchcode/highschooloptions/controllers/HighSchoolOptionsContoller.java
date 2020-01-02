@@ -50,7 +50,7 @@ public class HighSchoolOptionsContoller {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddForm(@ModelAttribute @Valid School newSchool,
-                                 Errors errors, Model model) {
+                                 Errors errors, Model model, @RequestParam String website) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add School");
@@ -59,13 +59,17 @@ public class HighSchoolOptionsContoller {
             model.addAttribute("schoolMaps", SchoolMap.values());
             model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
             return "school/add";
+        // } else if (!website.contains("https://") || !website.contains("http://")) {
+            //website = ("http://" + website);
+            // schoolDao.save(newSchool);
+
+        } else {
+            schoolDao.save(newSchool);
         }
 
-        schoolDao.save(newSchool);
-
-        // Redirect to /
         return "redirect:";
     }
+
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveSchoolForm(Model model) {

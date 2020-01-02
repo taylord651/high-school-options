@@ -15,13 +15,13 @@
     <br>
     <div>
         <label th:for="password"> Password:</label>
-        <input class="form-control" th:field="*{password}"/>
+        <input class="form-control" th:field="*{password}" type="password"/>
         <span th:errors="*{password}" class="error"></span>
     </div>
     <br>
     <div>
         <label for="verifyPassword"> Verify Password:</label>
-        <input class="form-control"  id="verifyPassword" name="verifyPassword"/>
+        <input class="form-control"  id="verifyPassword" name="verifyPassword" type="password"/>
         <span th:text="${error_message}" class="error"></span>
     </div>
     <br>
@@ -29,6 +29,8 @@
         <input class="form-control" type="submit" value="Create Account" style="max-width:140px"/>
     </div>
 </form>
+
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>

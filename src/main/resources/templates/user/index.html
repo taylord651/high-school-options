@@ -24,13 +24,15 @@
     <br>
     <div>
         <label th:for="password"> Password:</label>
-        <input class="form-control" name="password" id="password"/>
+        <input class="form-control" name="password" id="password" type="password"/>
     </div>
     <br>
     <div>
         <input class="form-control" type="submit" value="Login" style="max-width:120px"/>
     </div>
 </form>
+
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>
