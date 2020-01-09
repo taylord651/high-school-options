@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -32,35 +34,51 @@ public class UserController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String processLoginForm (Model model, @ModelAttribute @Valid User user, Errors errors,
-                                    @RequestParam String name, String password) {
+    public String processLoginForm (Model model, @ModelAttribute @Valid User user,
+                                    @RequestParam String name,
+                                    String password, HttpServletRequest request) {
+
+        @SuppressWarnings("unchecked")
 
         //userDao.findAll();
         User login_user = userDao.findByName(name);
 
-        boolean valid_username = name.length() >= 1;
-        boolean valid_password = password.length() >= 1;
+        boolean valid_username = name.length() > 3;
+        boolean valid_password = password.length() > 3;
+        boolean verified_password = password.equals(login_user.getPassword());
+        boolean verified_user = login_user != null;
 
-        if (!valid_username) {
+        if (!valid_username || !valid_password || !verified_user || !verified_password) {
+            if (!valid_username) {
+                model.addAttribute("missing_username_error", "Username required");
+            } else if (!verified_user) {
+                model.addAttribute("invalid_username_error", "Username not found. Create an account.");
+            } if (!valid_password) {
+                model.addAttribute("missing_password_error", "Password required");
+            } else if (!password.equals(login_user.getPassword())) {
+                model.addAttribute("incorrect_password_error", "Incorrect password");
+            }
+
+            model.addAttribute("username", name);
             model.addAttribute("title", "Login");
-            model.addAttribute("error_message", "Username required");
-            return "user/index";
-        } else if (!valid_password) {
-            model.addAttribute("title", "Login");
-            model.addAttribute("error_message", "Password required");
-            return "user/index";
-        } else if (login_user == null) {
-            model.addAttribute("title", "Login");
-            model.addAttribute("username_error", "Username not found. Create an account.");
-            return "user/index";
-        } else if (!password.equals(login_user.getPassword())) {
-            model.addAttribute("title", "Login");
-            model.addAttribute("password_error", "Incorrect password");
-            return "user/index";
+            return "redirect:";
         } else {
+
+            HttpSession session = request.getSession();
+            session.setAttribute("username", name);
+
             return "redirect:/school";
         }
     }
+
+    /* if (role.equals("Admin")) {
+            Only allow access/show "home", "add", "remove" and "logout" pages;
+            redirect to /school
+       } else {
+            Only allow access/show "home", "logout" and "my schools" pages;
+            redirect to /school
+       }
+     */
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String displayNewUserForm (Model model) {
@@ -86,7 +104,7 @@ public class UserController {
         } else {
                 userDao.save(user);
 
-                return "redirect:";
+                return "redirect:/user";
             }
         }
 
@@ -138,5 +156,13 @@ public class UserController {
 
         return "redirect:/user/view/" + theUser.getId();
     }
+
+    @RequestMapping (value = "/logout")
+    public String logout(Model model, HttpServletRequest request, HttpSession session) {
+        session.invalidate();
+        //model.addAttribute("logout_successful", "Logout successful");
+        return "redirect:/school";
+    }
+
     }
 

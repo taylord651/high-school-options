@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -27,12 +28,17 @@ public class HighSchoolOptionsContoller {
 
     // Request path: / (index template (homepage))
     @RequestMapping (value = "")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
 
         model.addAttribute("schools", schoolDao.findAll());
         model.addAttribute("title", "High School Options");
 
-        return "school/index";
+        if (session.getAttribute("username") == null) {
+            return "school/index";
+        } else {
+            model.addAttribute("welcome_user", "Welcome " + session.getAttribute("username"));
+            return "school/index";
+        }
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)

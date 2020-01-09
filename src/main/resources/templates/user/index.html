@@ -12,19 +12,19 @@
 <form method="post" style="max-width:600px">
     <br>
     <p>Don't have an account? <a href="user/new">Create one!</a></p>
-    <span th:text="${password_error}" class="error"></span>
-    <span th:text="${error_message}" class="error"></span>
-    <span th:text="${username_error}" class="error"></span>
-    <span th:text="${password_error}" class="error"></span>
 
     <div>
         <label th:for="name"> Username:</label>
-        <input class="form-control" name="name" id="name"/>
+        <input class="form-control" name="name" id="name" th:value="${username}"/>
+        <span th:text="${missing_username_error}" class="error"></span>
+        <span th:text="${invalid_username_error}" class="error"></span>
     </div>
     <br>
     <div>
         <label th:for="password"> Password:</label>
         <input class="form-control" name="password" id="password" type="password"/>
+        <span th:text="${missing_password_error}" class="error"></span>
+        <span th:text="${incorrect_password_error}" class="error"></span>
     </div>
     <br>
     <div>
