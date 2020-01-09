@@ -67,7 +67,7 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("username", name);
 
-            return "redirect:/school";
+            return "redirect:/myschools";
         }
     }
 
@@ -107,55 +107,6 @@ public class UserController {
                 return "redirect:/user";
             }
         }
-
-    @RequestMapping(value = "all-users", method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("title", "Users");
-        model.addAttribute("users", userDao.findAll());
-        return "user/all-users";
-    }
-
-    @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
-    public String viewMenu (Model model, @PathVariable int userId) {
-
-        User user = userDao.findById(userId);
-
-        model.addAttribute("title", "My Schools: " + user.getName());
-        model.addAttribute("schools", user.getSchools());
-        model.addAttribute("userId", user.getId());
-
-        return "user/view";
-    }
-
-    @RequestMapping(value = "add-school/{userId}", method = RequestMethod.GET)
-    public String addOption (Model model, @PathVariable int userId) {
-
-        User user = userDao.findById(userId);
-
-        AddSchoolOptionForm form = new AddSchoolOptionForm(
-                schoolDao.findAll(),
-                user);
-
-        model.addAttribute("title", "Add School to My Account: " + user.getName());
-        model.addAttribute("form", form);
-        return "user/add-school";
-    }
-
-    @RequestMapping(value = "add-school", method = RequestMethod.POST)
-    public String addOption (Model model, @ModelAttribute @Valid AddSchoolOptionForm form, Errors errors) {
-
-        if (errors.hasErrors()) {
-            model.addAttribute("form", form);
-            return "user/add-school";
-        }
-
-        School theSchool = schoolDao.findById(form.getSchoolId());
-        User theUser = userDao.findById(form.getUserId());
-        theUser.addItem(theSchool);
-        userDao.save(theUser);
-
-        return "redirect:/user/view/" + theUser.getId();
-    }
 
     @RequestMapping (value = "/logout")
     public String logout(Model model, HttpServletRequest request, HttpSession session) {

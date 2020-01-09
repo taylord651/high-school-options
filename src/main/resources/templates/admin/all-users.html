@@ -7,7 +7,7 @@
 
 <ul>
     <li th:each="user : ${users}">
-        <a th:href="'/user/view/' + ${user.id}" th:text="${user.name}"></a>
+        <a th:href="'/admin/view/' + ${user.id}" th:text="${user.name}"></a>
     </li>
 </ul>
 

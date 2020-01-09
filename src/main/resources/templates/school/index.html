@@ -10,9 +10,6 @@
     <a href="/school/add">Add</a> |
     <a href="/school/remove">Remove</a>
 
-    <p th:text="*{welcome_user}"></p>
-    <p th:text="*{logout_successful}"></p>
-
     <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
 
     <table class="table">

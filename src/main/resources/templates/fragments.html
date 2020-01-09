@@ -16,14 +16,19 @@
 <body>
 
 <nav th:fragment="navigation">
+    <p th:text="*{welcome_user}"></p>
+    <p th:text="*{login_message}"></p>
+    <p th:text="*{logout_successful}"></p>
+
     <a href="/school">Home</a> |
+    <a href="/myschools">My Schools</a> |
     <a href="/user">Login</a> |
     <a href="user/logout">Logout</a>
 </nav>
 
 <footer th:fragment="footer">
     <hr>
-    <p>Copyright &copy; 2020 High School Options. All rights reserved.</p>
+    <p>&copy; 2020 High School Options. All rights reserved.</p>
 </footer>
 
 </body>

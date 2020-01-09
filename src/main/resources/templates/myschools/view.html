@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">My Schools</h1>
+<h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
 <ul >
@@ -11,7 +11,7 @@
 
 <p th:unless="${schools.size()}">No schools yet</p>
 
-<a href="/myschools/add-school">Add School</a>
+<p><a th:href="'/user/add-school/' + ${userId}">Add School</a></p>
 
 <footer th:replace="fragments :: footer"></footer>
 
