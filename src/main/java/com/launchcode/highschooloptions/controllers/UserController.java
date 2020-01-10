@@ -34,34 +34,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String processLoginForm (Model model, @ModelAttribute @Valid User user,
+    public String processLoginForm (Model model, @ModelAttribute User user,
                                     @RequestParam String name,
                                     String password, HttpServletRequest request) {
 
-        @SuppressWarnings("unchecked")
-
-        //userDao.findAll();
         User login_user = userDao.findByName(name);
 
+        boolean verified_user = login_user != null;
         boolean valid_username = name.length() > 3;
         boolean valid_password = password.length() > 3;
-        boolean verified_password = password.equals(login_user.getPassword());
-        boolean verified_user = login_user != null;
 
-        if (!valid_username || !valid_password || !verified_user || !verified_password) {
+        if (!valid_username || !valid_password || !verified_user || !password.equals(login_user.getPassword())) {
             if (!valid_username) {
                 model.addAttribute("missing_username_error", "Username required");
             } else if (!verified_user) {
                 model.addAttribute("invalid_username_error", "Username not found. Create an account.");
             } if (!valid_password) {
                 model.addAttribute("missing_password_error", "Password required");
-            } else if (!password.equals(login_user.getPassword())) {
+            } else if (verified_user && !password.equals(login_user.getPassword())) {
                 model.addAttribute("incorrect_password_error", "Incorrect password");
             }
 
-            model.addAttribute("username", name);
-            model.addAttribute("title", "Login");
-            return "redirect:";
+                model.addAttribute("name", name);
+                model.addAttribute("title", "Login");
+                return "/user/index";
         } else {
 
             HttpSession session = request.getSession();

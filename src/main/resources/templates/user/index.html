@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<header th:replace="fragments :: header"></header>
 <body class="container">
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
@@ -9,15 +9,13 @@
 <a href="/user/new">Create Account</a> |
 <a href="/admin/all-users">Users</a>
 
-<p th:text="*{login_message}"></p>
-
 <form method="post" style="max-width:600px">
     <br>
-    <p>Don't have an account? <a href="user/new">Create one!</a></p>
+    <p>Don't have an account? <a href="/user/new">Create one!</a></p>
 
     <div>
         <label th:for="name"> Username:</label>
-        <input class="form-control" name="name" id="name" th:value="${username}"/>
+        <input class="form-control" name="name" id="name" th:value="${name}"/>
         <span th:text="${missing_username_error}" class="error"></span>
         <span th:text="${invalid_username_error}" class="error"></span>
     </div>

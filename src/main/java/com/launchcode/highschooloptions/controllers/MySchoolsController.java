@@ -50,7 +50,7 @@ public class MySchoolsController {
         }
     }
 
-    @RequestMapping(value = "add-school", method = RequestMethod.GET)
+    @RequestMapping(value = "/add-school", method = RequestMethod.GET)
     public String addOption (Model model, HttpSession session) {
 
         User user = userDao.findByName(session.getAttribute("username").toString());
@@ -64,7 +64,7 @@ public class MySchoolsController {
         return "myschools/add-school";
     }
 
-    @RequestMapping(value = "add-school", method = RequestMethod.POST)
+    @RequestMapping(value = "/add-school", method = RequestMethod.POST)
     public String addOption (Model model, @ModelAttribute @Valid AddSchoolOptionForm form, Errors errors) {
 
         if (errors.hasErrors()) {

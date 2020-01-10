@@ -35,7 +35,8 @@ public class School {
     @NotNull(message = "Select sports offered at school")
     private String sports;
 
-    @NotNull
+    private SchoolGender gender;
+
     @NotNull
     @Size(min=7, message = "Please include school website")
     private String website;
@@ -127,5 +128,13 @@ public class School {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public SchoolGender getGender() {
+        return gender;
+    }
+
+    public void setGender(SchoolGender gender) {
+        this.gender = gender;
     }
 }

@@ -50,6 +50,7 @@ public class HighSchoolOptionsContoller {
         model.addAttribute("schoolGpas", SchoolGpa.values());
         model.addAttribute("schoolMaps", SchoolMap.values());
         model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
+        model.addAttribute("schoolGenders", SchoolGender.values());
         return "school/add";
 
     }
@@ -64,6 +65,7 @@ public class HighSchoolOptionsContoller {
             model.addAttribute("schoolGpas", SchoolGpa.values());
             model.addAttribute("schoolMaps", SchoolMap.values());
             model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
+            model.addAttribute("schoolGenders", SchoolGender.values());
             return "school/add";
         // } else if (!website.contains("https://") || !website.contains("http://")) {
             //website = ("http://" + website);

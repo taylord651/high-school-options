@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<header th:replace="fragments :: header"></header>
 <body class="container">
     <h1 th:text="${title}">Title</h1>
     <nav th:replace="fragments :: navigation"></nav>
@@ -31,6 +31,17 @@
             <label th:for="website">Website: </label>
             <input class="form-control" th:field="*{website}"/>
             <span th:errors="*{website}" class="error"></span>
+        </div>
+        <hr>
+
+        <div class="form-group">
+            <label th:for="gender">Gender: </label>
+            <select th:field="*{gender}" class="form-control">
+                <option th:each="schoolGender : ${schoolGenders}"
+                        th:text="${schoolGender.name}"
+                        th:value="${schoolGender}"></option>
+            </select>
+            <span th:errors="*{type}" class="error"></span>
         </div>
         <hr>
 
