@@ -3,10 +3,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
-<header>
-    <nav th:replace="fragments :: navigation"></nav>
+<header class="container">
+    <div class="row">
+        <h1 th:text="${title}" class="col-sm-8">Default Title</h1>
+        <nav th:replace="fragments :: navigation" class="col-sm-4 text-right"></nav>
+    </div>
 </header>
 
 <form method="post" style="max-width:600px" th:object="${user}">
