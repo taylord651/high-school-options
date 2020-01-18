@@ -40,6 +40,8 @@ public class User {
 
     public void addItem(School item) { schools.add(item); }
 
+    public void removeItem(School item) { schools.remove(item); }
+
     public String getName() {
         return name;
     }

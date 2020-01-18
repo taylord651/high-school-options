@@ -3,6 +3,8 @@ package com.launchcode.highschooloptions.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,7 +35,7 @@ public class School {
     private SchoolSpecialty specialty;
 
     @NotNull(message = "Select sports offered at school")
-    private String sports;
+    private ArrayList sports;
 
     private SchoolGender gender;
 
@@ -44,7 +46,7 @@ public class School {
     @ManyToMany(mappedBy = "schools")
     private List<User> users;
 
-    public School(String name, String address, String phone, String sports, String website) {
+    public School(String name, String address, String phone, ArrayList sports, String website) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -82,11 +84,11 @@ public class School {
         this.phone = phone;
     }
 
-    public String getSports() {
+    public ArrayList getSports() {
         return sports;
     }
 
-    public void setSports(String sports) {
+    public void setSports(ArrayList sports) {
         this.sports = sports;
     }
 

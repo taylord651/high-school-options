@@ -1,19 +1,15 @@
 package com.launchcode.highschooloptions.controllers;
 
-import com.launchcode.highschooloptions.models.AddSchoolOptionForm;
-import com.launchcode.highschooloptions.models.School;
-import com.launchcode.highschooloptions.models.User;
+import com.launchcode.highschooloptions.models.*;
 import com.launchcode.highschooloptions.models.data.SchoolDao;
 import com.launchcode.highschooloptions.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RequestMapping("admin")
@@ -25,6 +21,80 @@ public class AdminController {
 
     @Autowired
     private UserDao userDao;
+
+    // Request path: / (index template (homepage))
+    @RequestMapping (value = "")
+    public String index(Model model, HttpSession session) {
+
+        if (session.getAttribute("username") == null) {
+            return "redirect:/user";
+        }
+
+        User user = userDao.findByName(session.getAttribute("username").toString());
+
+        if (user.getRole().equals("Admin")){
+            model.addAttribute("welcome_user", "Welcome " + session.getAttribute("username"));
+            model.addAttribute("title", "Admin Account: " + session.getAttribute("username"));
+            return "admin/index";
+        } else {
+            return "redirect:/school";
+        }
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String displayAddForm(Model model) {
+
+        model.addAttribute("title", "Add School");
+        model.addAttribute(new School());
+        model.addAttribute("schoolTypes", SchoolType.values());
+        model.addAttribute("schoolGpas", SchoolGpa.values());
+        model.addAttribute("schoolMaps", SchoolMap.values());
+        model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
+        model.addAttribute("schoolGenders", SchoolGender.values());
+        return "admin/add";
+
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String processAddForm(@ModelAttribute @Valid School newSchool,
+                                 Errors errors, Model model, @RequestParam String website) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add School");
+            model.addAttribute("schoolTypes", SchoolType.values());
+            model.addAttribute("schoolGpas", SchoolGpa.values());
+            model.addAttribute("schoolMaps", SchoolMap.values());
+            model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
+            model.addAttribute("schoolGenders", SchoolGender.values());
+            return "admin/add";
+            // } else if (!website.contains("https://") || !website.contains("http://")) {
+            //website = ("http://" + website);
+            // schoolDao.save(newSchool);
+
+        } else {
+            schoolDao.save(newSchool);
+        }
+
+        return "redirect:/school";
+    }
+
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveSchoolForm(Model model) {
+        model.addAttribute("schools", schoolDao.findAll());
+        model.addAttribute("title", "Remove School");
+        return "admin/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveSchoolForm(@RequestParam int[] schoolIds) {
+
+        for (int schoolId : schoolIds) {
+            schoolDao.deleteById(schoolId);
+        }
+
+        return "redirect:/school";
+    }
 
     @RequestMapping(value = "/all-users", method = RequestMethod.GET)
     public String index(Model model) {

@@ -79,4 +79,34 @@ public class MySchoolsController {
 
         return "redirect:/myschools";
     }
+
+    @RequestMapping(value = "/remove-school", method = RequestMethod.GET)
+    public String removeOption (Model model, HttpSession session) {
+
+        User user = userDao.findByName(session.getAttribute("username").toString());
+
+        AddSchoolOptionForm form = new AddSchoolOptionForm(
+                schoolDao.findAll(),
+                user);
+
+        model.addAttribute("title", "Remove School from My Account: " + user.getName());
+        model.addAttribute("form", form);
+        return "myschools/remove-school";
+    }
+
+    @RequestMapping(value = "/remove-school", method = RequestMethod.POST)
+    public String removeOption (Model model, @ModelAttribute @Valid AddSchoolOptionForm form, Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("form", form);
+            return "myschools/remove-school";
+        }
+
+        School theSchool = schoolDao.findById(form.getSchoolId());
+        User theUser = userDao.findById(form.getUserId());
+        theUser.removeItem(theSchool);
+        userDao.save(theUser);
+
+        return "redirect:/myschools";
+    }
 }

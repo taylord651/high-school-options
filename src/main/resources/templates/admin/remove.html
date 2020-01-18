@@ -10,7 +10,7 @@
     </div>
 </header>
 
-<p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
+<p th:unless="${schools} and ${schools.size()}">No schools options avaiable.</p>
 
 <form method="post">
 <table class="table">
@@ -42,7 +42,11 @@
             <td th:for="${school.id}" th:text="${school.gpa.name}"></td>
             <td th:for="${school.id}" th:text="${school.map.name}"></td>
             <td th:for="${school.id}" th:text="${school.specialty.name}"></td>
-            <td th:for="${school.id}" th:text="${school.sports}"> </td>
+            <td th:for="${school.id}">
+                <ul th:each="sport : ${school.sports}">
+                    <li th:text="${sport}"></li>
+                </ul>
+            </td>
         </tr>
     </div>
 </table>

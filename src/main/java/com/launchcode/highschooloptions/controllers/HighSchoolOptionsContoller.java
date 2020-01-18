@@ -27,7 +27,7 @@ public class HighSchoolOptionsContoller {
     private UserDao userDao;
 
     // Request path: / (index template (homepage))
-    @RequestMapping (value = "")
+    @RequestMapping (value = "", method = RequestMethod.GET)
     public String index(Model model, HttpSession session) {
 
         model.addAttribute("schools", schoolDao.findAll());
@@ -41,60 +41,26 @@ public class HighSchoolOptionsContoller {
         }
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddForm(Model model) {
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String addOptionFromHome (Model model, HttpSession session, @ModelAttribute
+                                     @RequestParam int[] schoolIds) {
 
-        model.addAttribute("title", "Add School");
-        model.addAttribute(new School());
-        model.addAttribute("schoolTypes", SchoolType.values());
-        model.addAttribute("schoolGpas", SchoolGpa.values());
-        model.addAttribute("schoolMaps", SchoolMap.values());
-        model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
-        model.addAttribute("schoolGenders", SchoolGender.values());
-        return "school/add";
+        if (session.getAttribute("username") == null) {
+            model.addAttribute("add_error", "You must login to add a school to your account");
+            model.addAttribute("schools", schoolDao.findAll());
 
-    }
-
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddForm(@ModelAttribute @Valid School newSchool,
-                                 Errors errors, Model model, @RequestParam String website) {
-
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add School");
-            model.addAttribute("schoolTypes", SchoolType.values());
-            model.addAttribute("schoolGpas", SchoolGpa.values());
-            model.addAttribute("schoolMaps", SchoolMap.values());
-            model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
-            model.addAttribute("schoolGenders", SchoolGender.values());
-            return "school/add";
-        // } else if (!website.contains("https://") || !website.contains("http://")) {
-            //website = ("http://" + website);
-            // schoolDao.save(newSchool);
-
+            return "school/index";
         } else {
-            schoolDao.save(newSchool);
+
+            for (int schoolId : schoolIds) {
+                School theSchool = schoolDao.findById(schoolId);
+                User theUser = userDao.findByName(session.getAttribute("username").toString());
+                theUser.addItem(theSchool);
+                userDao.save(theUser);
+            }
+
+            return "redirect:/myschools";
         }
 
-        return "redirect:";
     }
-
-
-    @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveSchoolForm(Model model) {
-        model.addAttribute("schools", schoolDao.findAll());
-        model.addAttribute("title", "Remove School");
-        return "school/remove";
-    }
-
-    @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveSchoolForm(@RequestParam int[] schoolIds) {
-
-        for (int schoolId : schoolIds) {
-            schoolDao.deleteById(schoolId);
-        }
-
-        return "redirect:";
-    }
-
-
 }

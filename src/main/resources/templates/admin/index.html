@@ -5,20 +5,16 @@
 
 <header class="container">
     <div class="row">
-        <h1 th:text="${title}" class="col-sm-8">Default Title</h1>
+        <h1 th:text="${title}" class="col-sm-8">Correct Admin Page</h1>
         <nav th:replace="fragments :: navigation" class="col-sm-4 text-right"></nav>
     </div>
 </header>
 
 <ul >
-    <li th:each="school : ${schools}" th:text="${school.name}"></li>
+    <li><a href="admin/add">Add School</a></li>
+    <li><a href="admin/remove">Remove School</a></li>
+    <li><a href="admin/all-users">View Users</a></li>
 </ul>
-
-<p th:unless="${schools.size()}">No schools yet</p>
-
-<a href="/myschools/add-school">Add School</a> |
-<a href="/myschools/remove-school">Remove School</a>
-
 
 <footer th:replace="fragments :: footer"></footer>
 

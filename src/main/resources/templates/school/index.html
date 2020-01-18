@@ -27,9 +27,13 @@
     </div>
 
     <div class="container">
-        <p th:unless="${schools} and ${schools.size()}">No schools meet your criteria.</p>
+        <p th:unless="${schools} and ${schools.size()}">No school options available.</p>
+        <p th:text="${add_error}"></p>
 
         <h3>School Directory</h3>
+
+        <form method="post">
+
         <table class="table">
 
             <tr>
@@ -47,25 +51,29 @@
             </tr>
 
             <tr th:each="school : ${schools}">
-                <!-- <td> <input type="checkbox" name="schoolIds" th:value="${school.id}" th:id="${school.id}"/> </td> -->
-                <td th:text="${school.name}"></td>
-                <td th:text="${school.address}"></td>
-                <td th:text="${school.phone}"></td>
-                <td> <a th:text="${school.website}" th:href="@{${school.website}}"></a></td>
-                <td th:text="${school.gender.name}"></td>
-                <td th:text="${school.type.name}"></td>
-                <td th:text="${school.gpa.name}"></td>
-                <td th:text="${school.map.name}"></td>
-                <td th:text="${school.specialty.name}"></td>
-                <td th:text="${school.sports}"> </td>
+                <td> <input type="checkbox" name="schoolIds" th:value="${school.id}" th:id="${school.id}"/> </td>
+                <td th:for="${school.id}" th:text="${school.name}"></td>
+                <td th:for="${school.id}" th:text="${school.address}"></td>
+                <td th:for="${school.id}"> <a th:text="${school.website}" th:href="@{${school.website}}"></a></td>
+                <td th:for="${school.id}" th:text="${school.phone}"></td>
+                <td th:for="${school.id}" th:text="${school.gender.name}"></td>
+                <td th:for="${school.id}" th:text="${school.type.name}"></td>
+                <td th:for="${school.id}" th:text="${school.gpa.name}"></td>
+                <td th:for="${school.id}" th:text="${school.map.name}"></td>
+                <td th:for="${school.id}" th:text="${school.specialty.name}"></td>
+                <td th:for="${school.id}">
+                    <ul th:each="sport : ${school.sports}">
+                        <li th:text="${sport}"></li>
+                    </ul>
+                </td>
             </tr>
 
         </table>
-        <!-- <input class="form-control" type="submit" value="Add to My Schools" /> -->
-        <div>
-            <a href="/school/add">Add School </a> |
-            <a href="/school/remove"> Remove School</a>
-        </div>
+
+        <input class="form-control" type="submit" value="Add to My Schools" />
+
+        </form>
+
         <footer th:replace="fragments :: footer"></footer>
     </div>
 

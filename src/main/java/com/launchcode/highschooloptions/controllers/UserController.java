@@ -63,18 +63,12 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("username", name);
 
-            return "redirect:/myschools";
+            } if (login_user.getRole().equals("Admin")) {
+                return "redirect:/admin";
+            } else {
+                return "redirect:/myschools";
         }
     }
-
-    /* if (role.equals("Admin")) {
-            Only allow access/show "home", "add", "remove" and "logout" pages;
-            redirect to /school
-       } else {
-            Only allow access/show "home", "logout" and "my schools" pages;
-            redirect to /school
-       }
-     */
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String displayNewUserForm (Model model) {
