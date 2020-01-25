@@ -22,7 +22,7 @@ public class User {
     @Size(min=3, max=30, message = "Password required and must be between 3 and 30 characters")
     private String password;
 
-    private String role = "User";
+    private String role = "Admin";
 
     @ManyToMany
     private List<School> schools;
