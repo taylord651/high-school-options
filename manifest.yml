@@ -1,4 +1,4 @@
 applications:
   - name: high-school-options
-  - buildpacks: java_buildpacks
-  - path: build/libs/high-school-options-0.0.1-SNAPSHOT.jar
+    buildpacks: java_buildpacks
+    path: build/libs/high-school-options-0.0.1-SNAPSHOT.jar
