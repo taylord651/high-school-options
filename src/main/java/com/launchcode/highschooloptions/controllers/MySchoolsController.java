@@ -95,17 +95,17 @@ public class MySchoolsController {
 
     @RequestMapping(value = "/remove-school", method = RequestMethod.POST)
     public String removeOption (Model model, HttpSession session,
-                                @ModelAttribute School school, @Valid AddSchoolOptionForm userForm,
+                                @ModelAttribute @Valid AddSchoolOptionForm form,
                                 Errors errors) {
 
-        User user = userDao.findById(userForm.getUserId());
-
-        AddSchoolOptionForm form = new AddSchoolOptionForm(user.getSchools(),
-                user);
-
         if (errors.hasErrors()) {
+            User user = userDao.findByName(session.getAttribute("username").toString());
+
+            AddSchoolOptionForm userForm = new AddSchoolOptionForm(user.getSchools(),
+                    user);
+
             model.addAttribute("title", "Remove School from My Account: " + user.getName());
-            model.addAttribute("form", form);
+            model.addAttribute("form", userForm);
             return "myschools/remove-school";
         }
 
