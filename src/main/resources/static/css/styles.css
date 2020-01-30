@@ -1,16 +1,8 @@
-html {
-
-}
-
-header {
-
-}
-
 body {
-
+  background-color: white;
+  margin: 50px;
+  padding: 50px;
 }
-
-
 .error {
     color: red;
 }
