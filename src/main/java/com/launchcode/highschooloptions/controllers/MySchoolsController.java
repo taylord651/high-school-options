@@ -92,7 +92,7 @@ public class MySchoolsController {
     }
 
     @RequestMapping(value = "/remove-school", method = RequestMethod.POST)
-    public String removeOption (Model model, HttpSession session, @PathVariable int schoolId,
+    public String removeOption (Model model, HttpSession session, @RequestParam int schoolId,
                                 @ModelAttribute @Valid Errors errors) {
 
         User user = userDao.findByName(session.getAttribute("username").toString());
