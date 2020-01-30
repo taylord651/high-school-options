@@ -10,7 +10,7 @@
     </div>
 </header>
 
-<form method="post" style="max-width:600px">
+<form method="post" style="max-width:600px" th:object="*{form}">
 
     <div class="form-group">
         <label th:for="schoolId">School</label>
@@ -20,7 +20,7 @@
                     th:value="${school.id}"></option>
         </select>
     </div>
-    <input type="hidden" name="userId" th:value="${user.id}" />
+    <input type="hidden" name="userId" th:value="*{user.id}" />
 
     <input type="submit" value="Remove School" style="max-width:120px"/>
 </form>
