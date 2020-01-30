@@ -42,17 +42,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddForm(Model model) {
+    public String displayAddForm(Model model, HttpSession session) {
 
-        model.addAttribute("title", "Add School");
-        model.addAttribute(new School());
-        model.addAttribute("schoolTypes", SchoolType.values());
-        model.addAttribute("schoolGpas", SchoolGpa.values());
-        model.addAttribute("schoolMaps", SchoolMap.values());
-        model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
-        model.addAttribute("schoolGenders", SchoolGender.values());
-        return "admin/add";
+        User user = userDao.findByName(session.getAttribute("username").toString());
 
+        if (user.getRole().equals("Admin")) {
+            model.addAttribute("title", "Add School");
+            model.addAttribute(new School());
+            model.addAttribute("schoolTypes", SchoolType.values());
+            model.addAttribute("schoolGpas", SchoolGpa.values());
+            model.addAttribute("schoolMaps", SchoolMap.values());
+            model.addAttribute("schoolSpecialties", SchoolSpecialty.values());
+            model.addAttribute("schoolGenders", SchoolGender.values());
+            return "admin/add";
+        } else {
+            return "redirect:/school";
+        }
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -80,10 +85,17 @@ public class AdminController {
 
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveSchoolForm(Model model) {
-        model.addAttribute("schools", schoolDao.findAll());
-        model.addAttribute("title", "Remove School");
-        return "admin/remove";
+    public String displayRemoveSchoolForm(Model model, HttpSession session) {
+
+        User user = userDao.findByName(session.getAttribute("username").toString());
+
+        if (user.getRole().equals("Admin")) {
+            model.addAttribute("schools", schoolDao.findAll());
+            model.addAttribute("title", "Remove School");
+            return "admin/remove";
+        } else {
+            return "redirect:/school";
+        }
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
@@ -97,40 +109,65 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/all-users", method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("title", "Users");
-        model.addAttribute("users", userDao.findAll());
-        return "admin/all-users";
+    public String allUsers(Model model, HttpSession session) {
+
+        User user = userDao.findByName(session.getAttribute("username").toString());
+
+        if (user.getRole().equals("Admin")) {
+            model.addAttribute("title", "Users");
+            model.addAttribute("users", userDao.findAll());
+            return "admin/all-users";
+        } else {
+        return "redirect:/school";
+    }
     }
 
     @RequestMapping(value = "/view/{userId}", method = RequestMethod.GET)
-    public String viewMenu (Model model, @PathVariable int userId) {
+    public String viewMenu (Model model, HttpSession session, @PathVariable int userId) {
 
-        User user = userDao.findById(userId);
+        User user = userDao.findByName(session.getAttribute("username").toString());
 
-        model.addAttribute("title", "My Schools: " + user.getName());
-        model.addAttribute("schools", user.getSchools());
-        model.addAttribute("userId", user.getId());
+        User userById = userDao.findById(userId);
 
-        return "admin/view";
+        if (user.getRole().equals("Admin")) {
+            model.addAttribute("title", "My Schools: " + userById.getName());
+            model.addAttribute("schools", userById.getSchools());
+            model.addAttribute("userId", userById.getId());
+
+            return "admin/view";
+        } else {
+            return "redirect:/school";
+        }
     }
 
     @RequestMapping(value = "add-school/{userId}", method = RequestMethod.GET)
-    public String addOption (Model model, @PathVariable int userId) {
+    public String addOption (Model model, HttpSession session, @PathVariable int userId) {
 
-        User user = userDao.findById(userId);
+        User user = userDao.findByName(session.getAttribute("username").toString());
+
+        User userById = userDao.findById(userId);
 
         AddSchoolOptionForm form = new AddSchoolOptionForm(
                 schoolDao.findAll(),
-                user);
+                userById);
 
-        model.addAttribute("title", "Add School to My Account: " + user.getName());
-        model.addAttribute("form", form);
-        return "admin/add-school";
-    }
+        if (user.getRole().equals("Admin")) {
+            model.addAttribute("title", "Add School to My Account: " + userById.getName());
+            model.addAttribute("form", form);
+            return "admin/add-school";
+        } else {
+            return "redirect:/school";
+        }
+        }
 
     @RequestMapping(value = "add-school", method = RequestMethod.POST)
-    public String addOption (Model model, @ModelAttribute @Valid AddSchoolOptionForm form, Errors errors) {
+    public String addOption (Model model, HttpSession session, @ModelAttribute @Valid AddSchoolOptionForm form, Errors errors) {
+
+        User user = userDao.findByName(session.getAttribute("username").toString());
+
+        if (!user.getRole().equals("Admin")) {
+            return "redirect:/school";
+        }
 
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
