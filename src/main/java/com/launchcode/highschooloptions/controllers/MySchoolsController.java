@@ -86,7 +86,7 @@ public class MySchoolsController {
         User user = userDao.findByName(session.getAttribute("username").toString());
 
         model.addAttribute("title", "Remove School from My Account: " + user.getName());
-        model.addAttribute("form", user.getSchools());
+        model.addAttribute("schools", user.getSchools());
         return "myschools/remove-school";
     }
 
