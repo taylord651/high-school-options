@@ -15,7 +15,7 @@
     <div class="form-group">
         <label th:for="schoolId">School</label>
         <select name="schoolId">
-            <option th:each="school : *{user-schools}"
+            <option th:each="school : ${schools}"
                     th:text="${school.name}"
                     th:value="${school.id}"></option>
         </select>
